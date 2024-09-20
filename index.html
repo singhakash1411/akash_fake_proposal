@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Do you love me?</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden; 
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: black;
+            color: white;
+            font-family: cursive; 
+        }
+
+        .container {
+            text-align: center;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        h1 {
+            font-size: 4em; 
+        }
+
+        .buttons {
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 2em; 
+            margin: 10px;
+            cursor: pointer;
+            border-radius: 15px;
+            border: none;
+            background-color: #008cba;
+            color: white;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #005f5f;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        #noBtn {
+            position: absolute; 
+        }
+
+        #response {
+            margin-top: 20px;
+            font-size: 1.5em;
+            color: green;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Do you love me?</h1>
+        <div class="buttons">
+            <button id="yesBtn">Yes</button>
+            <button id="noBtn">No</button>
+        </div>
+        <p id="response" class="hidden"><b>I knew it! 😊</b></p>
+    </div>
+
+    <script>
+        const noBtn = document.getElementById('noBtn');
+        const yesBtn = document.getElementById('yesBtn');
+        const response = document.getElementById('response');
+
+        
+        document.addEventListener('mousemove', (e) => {
+            const rect = noBtn.getBoundingClientRect();
+            const distanceX = Math.abs(e.clientX - rect.left - rect.width / 2);
+            const distanceY = Math.abs(e.clientY - rect.top - rect.height / 2);
+            const proximity = 50; 
+
+            if (distanceX < proximity && distanceY < proximity) {
+               
+                const x = Math.random() * (window.innerWidth - noBtn.clientWidth);
+                const y = Math.random() * (window.innerHeight - noBtn.clientHeight);
+                noBtn.style.left = x + 'px';
+                noBtn.style.top = y + 'px';
+            }
+        });
+
+        yesBtn.addEventListener('click', () => {
+            response.classList.remove('hidden');
+        });
+    </script>
+</body>
+</html>
